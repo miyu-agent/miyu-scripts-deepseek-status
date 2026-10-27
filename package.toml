@@ -1,0 +1,6 @@
+[package]
+version = "0.1.0"
+name = { en = "DeepSeek status", zh = "DeepSeek 服务状态" }
+summary = { en = "Is DeepSeek down? Each service's state and 30-day uptime from the official status page, plus recent incidents", zh = "DeepSeek 挂了没：照官方状态页看各项服务的状态、30 天可用率和最近的故障" }
+author = "SHORiN-KiWATA"
+icon = "zap"
