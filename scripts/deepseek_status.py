@@ -188,7 +188,7 @@ def main():
     for comp in components:
         cid = comp.get("component_id")
         rate = uptime.get(cid)
-        rate = f"，30 天可用率 {rate}%" if isinstance(rate, (int, float)) else ""
+        rate = f"，30 天可用率 {rate}%" if isinstance(rate, (int, float)) and not isinstance(rate, bool) else ""
         out.append(f"- {comp.get('name', '?')}：{zh(state.get(cid, 'operational'))}{rate}")
 
     if active:
@@ -242,7 +242,8 @@ def to_json(now, components, uptime, state, active, recent):
     return {"ok": True, "checked": now.isoformat(timespec="minutes"), "source": URL, "all_operational": not active,
             "components": [{"name": c.get("name"), "status": state.get(c.get("component_id"), "operational"),
                             "uptime_30d": uptime.get(c.get("component_id"))
-                            if isinstance(uptime.get(c.get("component_id")), (int, float)) else None}
+                            if isinstance(uptime.get(c.get("component_id")), (int, float))
+                            and not isinstance(uptime.get(c.get("component_id")), bool) else None}
                            for c in components],
             "ongoing": [change_json(c, True) for c in active],
             "recent": [change_json(c, False) for c in recent]}
